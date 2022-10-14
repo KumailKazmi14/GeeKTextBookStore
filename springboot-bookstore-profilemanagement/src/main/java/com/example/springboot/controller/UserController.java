@@ -22,11 +22,13 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
+	// Get User
 	@GetMapping("/Users")
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
 
+	// Get User by Username
 	@GetMapping("/Users/{username}")
 	public ResponseEntity<User> getUserByUsername(@PathVariable(value = "username") String username) throws ResourceNotFoundException {
 		User user = userRepository.findById(username)
@@ -34,11 +36,13 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 
+	// Create User
 	@PostMapping("/Users")
 	public User createUser(@RequestBody User username) {
 		return userRepository.save(username);
 	}
 
+	// Update User
 	@PutMapping("/Users/{username}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "username") String username,
 			@RequestBody User userDetails) throws ResourceNotFoundException {
